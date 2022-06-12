@@ -24,6 +24,13 @@ const userSchema = new mongoose.Schema({
 },{
     timestamps:true
 })
+
+userSchema.virtual('Message',{
+    ref:'Message',
+    localField:"_id",
+    foreignField:"sender"
+
+})
 userSchema.pre('save', async function (next) {
     const user = this
     if (user.isModified('password')) {
